@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fahrenheit 451 - Character Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .button {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      font-size: 24px;
+      padding: 10px 20px;
+      text-align: center;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .loading-message {
+      font-size: 24px;
+      text-align: center;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .character-container {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .character-image {
+      max-width: 400px;
+      margin-bottom: 10px;
+    }
+
+    .character-description {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    #educationButton {
+      display: none;
+    }
+  </style>
+  <script>
+    var educationList = [
+      "Character with an education",
+      "Character without an education"
+    ];
+
+    var ambitionsWithEducation = [
+      "Become a billionaire",
+      "Create a cure for a famous disease",
+      "Become a soccer player"
+    ];
+
+    var ambitionsWithoutEducation = [
+      "None",
+      "None",
+      "None"
+    ];
+
+    var jobsWithEducation = [
+      "Teacher",
+      "Doctor",
+      "Actor"
+    ];
+
+    var jobsWithoutEducation = [
+      "Firemen",
+      "None",
+      "None"
+    ];
+
+    var names = [
+      "Guy Montag",
+      "Faber",
+      "Beatty"
+    ];
+
+    var educationWithEducation = [
+      "High-School Diploma",
+      "Doctorettes Degree",
+      "Dropped out of high-school"
+    ];
+
+    var educationWithoutEducation = [
+      "None",
+      "None",
+      "None"
+    ];
+
+    var characterImageList = [
+      "character1.jpg",
+      "character2.jpg",
+      "character3.jpg"
+    ];
+
+    var currentCharacter = {
+      education: "",
+      ambition: "",
+      job: "",
+      name: ""
+    };
+
+    function generateEducationButtons() {
+      var educationContainer = document.getElementById("educationContainer");
+      educationContainer.innerHTML = "";
+      for (var i = 0; i < educationList.length; i++) {
+        var educationButton = document.createElement("button");
+        educationButton.className = "button";
+        educationButton.innerText = educationList[i];
+        educationButton.onclick = function() {
+          currentCharacter.education = this.innerText;
+          educationContainer.style.display = "none";
+          generateEducationButton();
+          generateAmbitionButton();
+          generateJobButton();
+          generateNameButton();
+          generateAppearanceButton();
+        };
+        educationContainer.appendChild(educationButton);
+      }
+    }
+
+    function generateEducationButton() {
+      var educationButton = document.getElementById("educationButton");
+      educationButton.style.display = "block";
+      educationButton.onclick = function() {
+        if (currentCharacter.education === "Character with an education") {
+  currentCharacter.education = getRandomItem(educationWithEducation);
+} else {
+  currentCharacter.education = getRandomItem(educationWithoutEducation);
+}
+document.getElementById("educationValue").innerText = currentCharacter.education;
+educationButton.style.display = "none";
+
+      };
+    }
+
+    function generateAmbitionButton() {
+      var ambitionButton = document.getElementById("ambitionButton");
+      ambitionButton.style.display = "block";
+      ambitionButton.onclick = function() {
+        if (currentCharacter.education === "Character with an education") {
+  currentCharacter.ambition = getRandomItem(ambitionsWithEducation);
+} else {
+  currentCharacter.ambition = getRandomItem(ambitionsWithoutEducation);
+}
+document.getElementById("ambitionValue").innerText = currentCharacter.ambition;
+ambitionButton.style.display = "none";
+
+      };
+    }
+
+    function generateJobButton() {
+      var jobButton = document.getElementById("jobButton");
+      jobButton.style.display = "block";
+      jobButton.onclick = function() {
+        if (currentCharacter.education === "Character with an education") {
+  currentCharacter.job = getRandomItem(jobsWithEducation);
+} else {
+  currentCharacter.job = getRandomItem(jobsWithoutEducation);
+}
+document.getElementById("jobValue").innerText = currentCharacter.job;
+jobButton.style.display = "none";
+
+      };
+    }
+
+    function generateNameButton() {
+      var nameButton = document.getElementById("nameButton");
+      nameButton.style.display = "block";
+      nameButton.onclick = function() {
+        currentCharacter.name = getRandomItem(names);
+        document.getElementById("nameValue").innerText = currentCharacter.name; // Update the HTML element
+        nameButton.style.display = "none";
+      };
+    }
+
+    function generateAppearanceButton() {
+      var appearanceButton = document.getElementById("appearanceButton");
+      appearanceButton.style.display = "block";
+      appearanceButton.onclick = function() {
+        var characterContainer = document.getElementById("characterContainer");
+        var characterImage = document.getElementById("characterImage");
+        var randomImage = getRandomItem(characterImageList);
+        characterImage.src = randomImage;
+        characterContainer.style.display = "block";
+        appearanceButton.style.display = "none";
+        generateNewCharacterButton();
+      };
+    }
+
+    function generateNewCharacterButton() {
+      var newCharacterButton = document.getElementById("newCharacterButton");
+      newCharacterButton.style.display = "block";
+      newCharacterButton.onclick = function() {
+        resetCharacter();
+        generateEducationButtons();
+        newCharacterButton.style.display = "none";
+        window.location.href = "index3.html"; // Redirect to index3.html
+      };
+    }
+
+    function resetCharacter() {
+      currentCharacter.education = "";
+      currentCharacter.ambition = "";
+      currentCharacter.job = "";
+      currentCharacter.name = "";
+      document.getElementById("educationValue").innerText = "";
+      document.getElementById("ambitionValue").innerText = "";
+      document.getElementById("jobValue").innerText = "";
+      document.getElementById("nameValue").innerText = "";
+      document.getElementById("characterContainer").style.display = "none";
+      document.getElementById("characterImage").src = "";
+    }
+
+    function getRandomItem(array) {
+      var randomIndex = Math.floor(Math.random() * array.length);
+      return array[randomIndex];
+    }
+  </script>
+</head>
+<body>
+  <h1>Create Your Own Character</h1>
+
+  <div id="educationContainer">
+    <p>Do you want your character to have an education?</p>
+  </div>
+
+  <button id="educationButton" class="button" style="display: none;">Generate Education</button>
+
+
+  <button id="ambitionButton" class="button" style="display: none;">Generate Your Ambition</button>
+
+  <button id="jobButton" class="button" style="display: none;">Generate Your Job</button>
+
+  <button id="nameButton" class="button" style="display: none;">Generate Your Name</button>
+
+  <button id="appearanceButton" class="button" style="display: none;">Generate Appearance</button>
+
+  <div id="characterContainer" class="character-container" style="display: none;">
+    <img id="characterImage" class="character-image" src="" alt="Character Image">
+    <p id="characterDescription" class="character-description">
+      Education: <span id="educationValue"></span><br>
+      Ambition: <span id="ambitionValue"></span><br>
+      Job: <span id="jobValue"></span><br>
+      Name: <span id="nameValue"></span>
+    </p>
+  </div>
+
+  <button id="newCharacterButton" class="button" style="display: none;">Generate a New Character?</button>
+
+  <script>
+    generateEducationButtons();
+  </script>
+</body>
+</html>

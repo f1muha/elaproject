@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fahrenheit 451 - Novel Analysis Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .button {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      font-size: 24px;
+      padding: 10px 20px;
+      text-align: center;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .loading-message {
+      font-size: 24px;
+      text-align: center;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .character-container {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .character-image {
+      max-width: 400px;
+      margin-bottom: 10px;
+    }
+
+    .character-description {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .create-character-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+  <script>
+    function redirectToIndex2() {
+      window.location.href = "index2.html";
+    }
+
+    var characters = [
+      {
+        image: "character1.jpg",
+        description: `Character: Guy Montag
+          
+          Ambitions: None 
+          Job: Firemen 
+          Schedule: Fight Fires -> sleep --> repeat` 
+      },
+      {
+        image: "character2.jpg",
+        description: `Character: Mildred Montag
+Ambitions: Watching Tv
+Job: Unemployed
+Schedule: Watching mindless TV shows -> taking pills to numb emotions -> engaging in shallow conversations --> sleep --> repeat
+        `
+      },
+      {
+        image: "character3.jpg",
+        description: `Character: Captain Beatty
+Ambitions: None
+Job: Fire Chief
+Schedule: Enforcing censorship -> maintaining control --> sleep --> repeat
+        `
+      },
+      {
+        image: "character4.jpg",
+        description: `Character: Professor Faber (Before Montag)
+Ambitions: Preserving knowledge and inspiring change
+Job: Former English professor
+Schedule: Hiding and studying forbidden books -> planning resistance against the oppressive regime --> create gadgets --> sleep and repeat`
+      },
+    ];
+
+    function generateCharacter() {
+      var loadingMessage = document.getElementById("loadingMessage");
+      loadingMessage.style.display = "block";
+      
+      // Simulating loading time with setTimeout
+      setTimeout(function() {
+        loadingMessage.style.display = "none";
+        
+        var characterContainer = document.getElementById("characterContainer");
+        characterContainer.style.display = "block";
+        
+        var randomIndex = Math.floor(Math.random() * characters.length);
+        var randomCharacter = characters[randomIndex];
+
+        var characterImage = document.getElementById("characterImage");
+        characterImage.src = randomCharacter.image;
+        
+        var characterDescription = document.getElementById("characterDescription");
+        characterDescription.innerHTML = randomCharacter.description;
+      }, 2000);
+    }
+  </script>
+</head>
+<body>
+  <h1>Fahrenheit 451 - Novel Analysis Project</h1>
+  
+  <p>Fahrenheit 451 - Character Generator</p>
+
+  <button class="create-character-button button" onclick="redirectToIndex2()">Click to create your own character!</button>
+  
+  <!-- Add your project description and details here -->
+  
+  <button id="generateButton" class="button" onclick="generateCharacter()">Generate Character</button>
+  
+  <p id="loadingMessage" class="loading-message">Image loading...</p>
+  
+  <div id="characterContainer" class="character-container">
+    <img id="characterImage" class="character-image" src="" alt="Character Image">
+    <p id="characterDescription" class="character-description"></p>
+  </div>
+</body>
+</html>
